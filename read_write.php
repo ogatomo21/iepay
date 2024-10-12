@@ -6,7 +6,7 @@ function ie_write($wid, $wshop, $amount, $wtype, $wcontent)
     // 現在の日時を取得
     $currentDateTime = time();
 
-    //履歴表示用にユニークなIDをCSVのケツにつける
+    //履歴表示用にユニークなIDをCSVの頭につける
     $paymentID = uniqid("iepay-");
 
     // 追加する履歴をCSVフォーマットに整形
@@ -240,7 +240,7 @@ function ie_read3($rid)
 
         foreach ($transactions as $transaction) {
             // 取引の日付から年月を取得
-            $transactionMonth = date('Y年m月', $transaction['date']);
+            $transactionMonth = date('Y年m月d日 H時i分', $transaction['date']);
 
             // 新しい月が始まったら見出しを追加
             if ($transactionMonth !== $currentMonth) {
@@ -335,15 +335,6 @@ function wallet($wal_id, $wal_shop, $wal_balance, $wal_type, $wal_content)
         exit;
     }
     $wal_name = ie_name($wal_id);
-
-    //echo "<p class='subtitle'>決済詳細</p><div class='content'><ul>";
-    //echo "<li>会員ID: $user </li>";
-    //echo "<li>名前: $wal_name</li>";
-    //echo "<li>店舗名: $wal_shop</li>";
-    //echo "<li>内容: $wal_content</li>";
-    //echo "<li>いえPay残高: $balance 円</li>";
-    //echo "<li>決済金額: $wal_balance 円</li>";
-    //echo "</ul></div><br>";
 
     if ($wal_type === "+") {
         $syubetu = "チャージ";
