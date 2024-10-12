@@ -266,7 +266,7 @@ function ie_read3($rid)
                 $color = "hsl(348, 100%, 61%)";
             }
             echo " " . $transaction['shop'] . '</p>';
-            echo '<p style="text-align: right;">' . date('Y年m月 H時i分', $transaction['date']) . '</p>';
+            echo '<p style="text-align: right;">' . date('Y年m月d日 H時i分', $transaction['date']) . '</p>';
             echo '<p class="title mb-0">' . $transaction['amount'] . '円</p>';
             echo '<p>' . $transaction['content'] . '</p>';
             echo '</div><br><div class="column is-1 m-0" style="border:' . $color . ' 2px solid;"><a href="detail.php?id=' . $transaction['id'] . '"><div style="display:flex;justify-content:right;align-items:center;"><div class="has-text-right has-text-black"><i class="fas fa-chevron-right fa-2x has-text-black"></i><p class="title has-text-black">詳細</p></div></div></a></div></div></div></div><br>';
@@ -373,49 +373,8 @@ function wallet($wal_id, $wal_shop, $wal_balance, $wal_type, $wal_content)
         exit;
     }
 
-    // 現在のドメインを取得する
-    $domain = $_SERVER['HTTP_HOST'];
-
-    // 現在のディレクトリを取得する
-    $directory = dirname($_SERVER['PHP_SELF']);
-
-    // URLを構築する
-    $url = "http://$domain$directory";
-
-    $line = "只今いえPayにて決済がありました。ご確認ください。\n\n---決済詳細---\n\n決済種別:$syubetu\n店舗名: $wal_shop\n決済金額: $wal_balance 円\n\n詳しくはアプリ上でご確認ください。\n$url";
-
     if ($pay) {
         ie_write($wal_id, $wal_shop, $wal_balance, $wal_type, $wal_content);
-    }
-
-    // LINE Notifyここから
-    $apifile = "./linenotify/" . $wal_id . ".txt";
-    if (file_exists($apifile)) {
-        $access_token = file_get_contents($apifile);
-        $send_message = "\n" . str_replace('<br>', '\n', $line);
-        $url = "https://notify-api.line.me/api/notify";
-
-        $data = array(
-            "message" => $send_message
-        );
-        $data = http_build_query($data, "", "&");
-        $options = array(
-            'http' => array(
-                'method' => 'POST',
-                'header' => "Authorization: Bearer " . $access_token . "\r\n"
-                    . "Content-Type: application/x-www-form-urlencoded\r\n"
-                    . "Content-Length: " . strlen($data)  . "\r\n",
-                'content' => $data
-            )
-        );
-        $context = stream_context_create($options);
-        $resultJson = file_get_contents($url, FALSE, $context);
-        $resutlArray = json_decode($resultJson, TRUE);
-        if ($resutlArray['status'] != 200) {
-            echo "LINE Notifyへの送信に失敗しました。";
-        } else {
-            echo "LINE Notifyへの送信に成功しました。";
-        }
     }
 }
 

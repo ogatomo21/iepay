@@ -229,13 +229,6 @@ if (strpos($id, 'shop') === 0) {
                             <p>メールアドレス変更</p>
                         </button>
 
-                        <a href="notice.php" class="button is-success">
-                            <span class="icon">
-                                <i class="far fa-envelope"></i>
-                            </span>
-                            <p>決済通知設定</p>
-                        </a>
-
                         <a href="./logout.php" class="button is-danger">
                             <span class="icon">
                                 <i class="fas fa-sign-out-alt"></i>
