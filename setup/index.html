@@ -1,0 +1,92 @@
+<html>
+
+<head>
+    <title>いえPay</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <nav class="navbar is-link" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item">
+                <p>いえPay セットアップ</p>
+            </a>
+        </div>
+        </div>
+    </nav>
+
+    <div class="m-2">
+        <p>今から家庭・SOHO向けローカル決済サービス「いえPay」のセットアップを始めます。<br>
+            このサービスは利用する場合によっては<b>本物の「決済」となりえます。</b><br>
+            つきましては十分に下記の利用許諾契約書をお読みになり、本製品の規約に同意した上でお使いください。</p>
+        <textarea class="textarea" readonly>
+ソフトウェア利用許諾契約書(2024年1月版)
+
+1.このソフトウェアは完全無料で使えます。
+2.再配布はOKですがこの契約書も含め全く同じ状態でしてください。(できれば正規サイトのほうが安心かも)
+3.このソフトの保証はありません。自己責任です。(要するに本物のお金でこのツールを使って管理者の人的ミスでデータがパァになっても保証しないってこと)
+4.無料配布ですが著作権は私「小川智也」自身にあります。
+5.このツールを本物のお金で使う場合は常に細心の注意を払って運用してください。このツールもまだまだ未熟なので致命的なバグがどこかにあるかもしれません。
+6.このツールを本物のお金かつ大規模な団体や企業で使うことを推奨しません。大きなトラブルを防ぐためでもありますがこのツールは履歴や残高をすべてテキストファイルやcsvファイルで管理しているため莫大なデータは処理が重くなったりする可能性があります。
+7.このツールは2024年3月現在「小学生」が開発・管理しています。
+8.このツールにバグなどがあった場合は「t.ogawa@ogatomo.net」にメールで報告してください。できる限りではありますが改善します。
+
+ここまで見てくれてありがとうございます。
+インストールPASSは「6139」です。
+        </textarea><br>
+        <p>利用許諾契約書は<a href="iepay-licenseagreement.txt" download>こちら</a>よりダウンロードできます。</p>
+        <label class="checkbox">
+            <input type="checkbox" id="check">
+            最後まで読み、利用許諾契約書に<b>同意します。</b>
+        </label>
+        <p><br></p>
+        <div class="field">
+            <label class="label">インストールPASS</label>
+            <div class="control">
+                <input class="input" type="password" id="pass" style="width: 10em" autocomplete="new-password" required
+                    disabled>
+            </div>
+        </div><br>
+        <button id="next" class="button is-link" disabled>送信</button>
+        <p><br></p>
+        <div id="authpass" style="display:none;">
+            <p class="title">ユーザーの作成</p>
+            <p>同意いただきありがとうございます。<br>
+                まず初めに、ユーザーを下のリンクから作成してください。<br>
+                <a href="./passfile.php" class="button is-primary m-4">ユーザー作成ページ</a><br>
+                ユーザーを作成できましたら、上部ログインよりログインください。<br>
+                なお、安全のためセットアップが終わりましたら各自このsetupディレクトリをパソコンなど安全な場所にダウンロードしたあと、削除してください。
+            </p><br>
+        </div>
+    </div>
+    <script>
+        // チェックボックス要素を取得
+        var checkbox = document.getElementById("check");
+        var next = document.getElementById("next");
+        var pass = document.getElementById("pass");
+        var authpass = document.getElementById("authpass");
+
+        // チェックボックスの状態が変更されたときに実行される関数
+        checkbox.addEventListener("change", function () {
+            // チェックがされているかどうかを確認
+            if (checkbox.checked) {
+                next.disabled = ""
+                pass.disabled = ""
+            } else {
+                next.disabled = "true"
+                pass.disabled = "true"
+            }
+        });
+        next.addEventListener("click", function () {
+            if (pass.value == "6139") {
+                authpass.style.display = "block"; // 表示
+            } else {
+                alert("パスワードが違います")
+            }
+        });
+    </script>
+</body>
+
+</html>
