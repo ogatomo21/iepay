@@ -7,17 +7,14 @@ on:
       - 'main/*'
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: dokcer-compose up
-      run: |
-        docker-compose build
-        docker-compose up -d
-    - name: composer install
-      run: |
-        docker-compose exec -T php bash -c "composer install"
+    - name: Validate composer.json and composer.lock
+      run: composer validate
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest
     - name: phpunit
       run: |
         docker-compose exec -T php bash -c "php vendor/bin/phpunit"
