@@ -1,5 +1,6 @@
 {
     "name": "ogatomo21/iepay",
+	"description": "Home&SOHO Pay",
     "type": "project",
     "require": {
         "phpunit/phpunit": "^10.5",
