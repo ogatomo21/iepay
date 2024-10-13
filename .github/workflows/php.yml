@@ -17,7 +17,7 @@ jobs:
       run: composer install --prefer-dist --no-progress --no-suggest
     - name: phpunit
       run: |
-        docker-compose exec -T php bash -c "php vendor/bin/phpunit"
+        php vendor/bin/phpunit
     - name: php-cs-fixer
       run: |
-        docker-compose exec -T php bash -c "vendor/bin/php-cs-fixer fix --dry-run"
+        vendor/bin/php-cs-fixer fix --dry-run
