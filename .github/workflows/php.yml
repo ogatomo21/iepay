@@ -14,10 +14,10 @@ jobs:
     - name: Validate composer.json and composer.lock
       run: composer validate
     - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest
+      run: composer install --prefer-dist --no-progress --no-suggest .
     - name: phpunit
       run: |
         php vendor/bin/phpunit
     - name: php-cs-fixer
       run: |
-        vendor/bin/php-cs-fixer fix --dry-run
+        vendor/bin/php-cs-fixer fix --dry-run .
