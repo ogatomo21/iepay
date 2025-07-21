@@ -5,6 +5,5 @@ services:
       - ./data:/var/www/html/data
       - ./balance:/var/www/html/balance
       - ./history:/var/www/html/history
-      - ./setup:/var/www/html/setup
     ports:
       - "80:80"
