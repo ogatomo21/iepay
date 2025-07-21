@@ -52,11 +52,12 @@ if(!isset($userkey) or !file_exists("data/".$userkey.".txt")){ // ユーザー�
 
     $_SESSION['data'] = $data; // ユーザ情報をセッション変数に格納{
     
-    if (strpos($id, 'shop') === 0) {
+    if (strpos($username, 'shop') === 0) {
         header('Location: shop.php');
-        exit; // リダイレクト後にスクリプトを終了
-    }else{
-        header('Location: main.php'); // メインページに遷移
+        exit;
+    } else {
+        header('Location: main.php');
+        exit;
     }
     exit;
 }
